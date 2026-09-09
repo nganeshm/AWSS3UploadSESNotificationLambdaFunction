@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: AWSS3Integration
+
+  profiles:
+    active: dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/digital_content
+    username: *******
+    password: *******
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10        # tune based on DB max_connections
+      minimum-idle: 2
+      connection-timeout: 30000
+      idle-timeout: 600000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+aws:
+  access-key: *******
+  secret-key: *******
+  region: eu-north-1
+  bucket-name: digital-content-app
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+
+templatesLocation: 'UploadedFiles'
